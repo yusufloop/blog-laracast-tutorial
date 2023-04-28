@@ -44,19 +44,17 @@ class Post
 
     public static function  find($slug)
     {
-    //     // base_path(); //helper untuk path
-    //     if(!file_exists( $path = resource_path("/posts/{$slug}.html"))){ //rasource _path: helper untuk guna /..resource/..../posts
-    //     throw new ModelNotFoundException(); //untuk throw exception. model
-    //         // return redirect('/');
-    //     //  abort(404); //buat page 404 laravel
-    //     //  dd('file does not exist'); //buat die and dump.
-    //     //  ddd('file does not exist'); //buat dd cuma ada interface
-    //     }
+        return static::allPost()->firstWhere('slug', $slug);
+    }
 
-    // return cache()->remember("posts.{$slug}", 1200, fn()=> file_get_contents($path));//buat cahching dan letak 1200 second 
+    public static function  findOrFail($slug)
+    {
+        $post =  static::find($slug);
 
-    
+        if(! $post){
+            throw new ModelNotFoundException();
+        }
 
-    return static::allPost()->firstWhere('slug', $slug);
+        return $post; 
     }
 }
