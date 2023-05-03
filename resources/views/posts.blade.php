@@ -1,5 +1,6 @@
-<x-layout >
-  
+@extends('components.layout')
+
+@section('content')
         @foreach ($posts as $post) 
             
             <article>
@@ -8,11 +9,13 @@
                         {{ $post->title }} 
                     </a>
                     </h1>
-                <div>
-                        {{ $post->excerpt; }} 
+
+                    <p>
+                        <a href="/categories/{{ $post->category->slug }}">{{ $post->category->name }}</a>
+                    </p>
+                    <div>
+                        {{ $post->excerpt }} 
                     </div>
             </article>
-    
         @endforeach
-    
-</x-layout>
+@endsection
